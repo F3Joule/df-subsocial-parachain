@@ -1,4 +1,4 @@
-use cumulus_primitives::ParaId;
+use cumulus_primitives_core::ParaId;
 use hex_literal::hex;
 use rococo_parachain_primitives::{AccountId, Signature};
 use sc_chain_spec::{ChainSpecExtension, ChainSpecGroup};
