@@ -25,7 +25,7 @@ std = [
 ]
 
 [dependencies.impl-trait-for-tuples]
-version = '0.1.3'
+version = '0.2.1'
 
 [dependencies.serde]
 optional = true
@@ -36,7 +36,7 @@ version = "1.0.101"
 default-features = false
 features = ['derive']
 package = 'parity-scale-codec'
-version = '1.3.0'
+version = '2.0.0'
 
 [dependencies.sp-runtime]
 default-features = false
