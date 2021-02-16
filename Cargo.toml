@@ -26,6 +26,8 @@ codec = { package = 'parity-scale-codec', version = '2.0.0' }
 structopt = "0.3.3"
 serde = { version = "1.0.119", features = ["derive"] }
 hex-literal = "0.2.1"
+# FIXME: remove after funty bitvec error is fixed https://github.com/bitvecto-rs/bitvec/issues/105
+funty = "=1.1.0"
 
 # Parachain dependencies
 parachain-runtime = { package = "subsocial-parachain-runtime", path = "runtime" }
