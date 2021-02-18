@@ -9,16 +9,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG PROFILE=release
 WORKDIR /subsocial
 
-COPY . /subsocial
-
 RUN apt-get update && \
 	apt-get dist-upgrade -y -o Dpkg::Options::="--force-confold" && \
 	apt-get install -y cmake cmake pkg-config libssl-dev git clang libclang-dev
 
+COPY scripts /subsocial
+
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
 	export PATH="$PATH:$HOME/.cargo/bin" && \
-	./scripts/init.sh && \
-	cargo build "--$PROFILE"
+	./init.sh
+
+COPY . /subsocial
+
+RUN ~/.cargo/bin/cargo build "--$PROFILE"
 
 # ===== SECOND STAGE ======
 
