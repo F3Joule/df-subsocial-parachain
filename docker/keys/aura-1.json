@@ -1,0 +1,10 @@
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "method":"author_insertKey",
+  "params": [
+    "aura",
+    "siren palm office multiply eight file cushion bitter police sausage deny cute",
+    "0x3a5faa2ca6f1f42906bf9393af29b97eeee0467f7c354de017b72b86ac65980c"
+  ]
+}
