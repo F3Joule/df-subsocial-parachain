@@ -1,4 +1,4 @@
-// Copyright 2019 Parity Technologies (UK) Ltd.
+// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 // This file is part of Cumulus.
 
 // Cumulus is free software: you can redistribute it and/or modify
@@ -78,7 +78,7 @@ pub fn new_partial(
 		client.clone(),
 		client.clone(),
 		inherent_data_providers.clone(),
-		&task_manager.spawn_handle(),
+		&task_manager.spawn_essential_handle(),
 		registry.clone(),
 	)?;
 
@@ -109,8 +109,8 @@ async fn start_node_impl<RB>(
 	validator: bool,
 	rpc_ext_builder: RB,
 ) -> sc_service::error::Result<(TaskManager, Arc<TFullClient<Block, RuntimeApi, Executor>>)>
-	where
-		RB: Fn(
+where
+	RB: Fn(
 			Arc<TFullClient<Block, RuntimeApi, Executor>>,
 		) -> jsonrpc_core::IoHandler<sc_rpc::Metadata>
 		+ Send
@@ -187,7 +187,7 @@ async fn start_node_impl<RB>(
 	};
 
 	if validator {
-		let proposer_factory = sc_basic_authorship::ProposerFactory::new(
+		let proposer_factory = sc_basic_authorship::ProposerFactory::with_proof_recording(
 			task_manager.spawn_handle(),
 			client.clone(),
 			transaction_pool,
@@ -251,5 +251,5 @@ pub async fn start_node(
 		validator,
 		|_| Default::default(),
 	)
-		.await
+	.await
 }

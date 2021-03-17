@@ -90,41 +90,11 @@ pub fn local_testnet_config(id: ParaId) -> Result<ChainSpec, String> {
 	))
 }
 
-pub fn staging_test_net(id: ParaId) -> Result<ChainSpec, String> {
-	let mut properties = Properties::new();
-	properties.insert("tokenSymbol".into(), "STG".into());
-	properties.insert("tokenDecimals".into(), 12.into());
-
-	Ok(ChainSpec::from_genesis(
-		"Staging Testnet",
-		"staging_testnet",
-		ChainType::Live,
-		move || {
-			testnet_genesis(
-				get_account_id_from_seed::<sr25519::Public>("Alice"),
-				vec![
-					(get_account_id_from_seed::<sr25519::Public>("Alice"), 10_000)
-				],
-				id,
-				get_account_id_from_seed::<sr25519::Public>("Ferdie"),
-			)
-		},
-		Vec::new(),
-		None,
-		None,
-		Some(properties),
-		Extensions {
-			relay_chain: "rococo_local_testnet".into(),
-			para_id: id.into(),
-		},
-	))
-}
-
 pub fn subsocial_config() -> Result<ChainSpec, String> {
 	ChainSpec::from_json_bytes(&include_bytes!("../res/subsocial.json")[..])
 }
 
-pub fn subsocial_staging_config(id: ParaId) -> Result<ChainSpec, String> {
+pub fn staging_test_net(id: ParaId) -> Result<ChainSpec, String> {
 	Ok(ChainSpec::from_genesis(
 		"Subsocial PC",
 		"subsocial_parachain",
@@ -188,27 +158,27 @@ fn testnet_genesis(
 	treasury_account_id: AccountId,
 ) -> parachain_runtime::GenesisConfig {
 	parachain_runtime::GenesisConfig {
-		frame_system: Some(parachain_runtime::SystemConfig {
+		frame_system: parachain_runtime::SystemConfig {
 			code: parachain_runtime::WASM_BINARY
 				.expect("WASM binary was not build, please build it!")
 				.to_vec(),
 			changes_trie_config: Default::default(),
-		}),
-		pallet_balances: Some(parachain_runtime::BalancesConfig {
+		},
+		pallet_balances: parachain_runtime::BalancesConfig {
 			balances: endowed_accounts
 				.iter()
 				.cloned()
 				.map(|(k, b)| (k, b * SUBS))
 				.collect(),
-		}),
-		pallet_sudo: Some(parachain_runtime::SudoConfig { key: root_key.clone() }),
-		parachain_info: Some(parachain_runtime::ParachainInfoConfig { parachain_id: id }),
-		pallet_utils: Some(parachain_runtime::UtilsConfig {
+		},
+		pallet_sudo: parachain_runtime::SudoConfig { key: root_key.clone() },
+		parachain_info: parachain_runtime::ParachainInfoConfig { parachain_id: id },
+		pallet_utils: parachain_runtime::UtilsConfig {
 			treasury_account: treasury_account_id,
-		}),
-		pallet_spaces: Some(parachain_runtime::SpacesConfig {
+		},
+		pallet_spaces: parachain_runtime::SpacesConfig {
 			endowed_account: root_key,
-		}),
+		},
 	}
 }
 

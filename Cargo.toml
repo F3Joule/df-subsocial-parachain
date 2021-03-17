@@ -26,8 +26,6 @@ codec = { package = 'parity-scale-codec', version = '2.0.0' }
 structopt = "0.3.3"
 serde = { version = "1.0.119", features = ["derive"] }
 hex-literal = "0.2.1"
-# FIXME: remove after funty bitvec error is fixed https://github.com/bitvecto-rs/bitvec/issues/105
-funty = "=1.1.0"
 
 # Parachain dependencies
 parachain-runtime = { package = "subsocial-parachain-runtime", path = "runtime" }
@@ -64,6 +62,7 @@ sc-telemetry = { git = "https://github.com/paritytech/substrate", branch = "roco
 jsonrpc-core = "15.1.0"
 
 # Cumulus dependencies
+cumulus-cli = { git = "https://github.com/paritytech/cumulus", branch = "rococo-v1" }
 cumulus-client-consensus-relay-chain = { git = "https://github.com/paritytech/cumulus", branch = "rococo-v1" }
 cumulus-client-collator = { git = "https://github.com/paritytech/cumulus", branch = "rococo-v1" }
 cumulus-client-service = { git = "https://github.com/paritytech/cumulus", branch = "rococo-v1" }
@@ -84,6 +83,7 @@ substrate-build-script-utils = { git = "https://github.com/paritytech/substrate"
 assert_cmd = "0.12"
 nix = "0.17"
 rand = "0.7.3"
+tempfile = "3.2.0"
 tokio = { version = "0.2.13", features = ["macros"] }
 
 # Polkadot dependencies
