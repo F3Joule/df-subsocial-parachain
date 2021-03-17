@@ -6,7 +6,7 @@ services:
     restart: always
     command:
       --chain rococo-local
-      --database ParityDb
+      --database paritydb-experimental
       --wasm-execution Compiled
       --alice
       --name "DappForce Rococo Alice"
@@ -29,7 +29,7 @@ services:
     restart: always
     command:
       --chain rococo-local
-      --database ParityDb
+      --database paritydb-experimental
       --wasm-execution Compiled
       --bob
       --name "DappForce Rococo Bob"

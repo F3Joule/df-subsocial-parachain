@@ -6,7 +6,7 @@ services:
     restart: always
     command:
       --db-cache 1024
-      --database ParityDb
+      --database paritydb-experimental
       --wasm-execution Compiled
       --collator
       --name "DappForce Subsocial Collator"

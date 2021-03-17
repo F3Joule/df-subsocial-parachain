@@ -6,11 +6,11 @@ services:
     restart: always
     command:
       --db-cache 1024
-      --database ParityDb
+      --database paritydb-experimental
       --wasm-execution Compiled
       --collator
       --name "Local Subsocial Collator"
-      --parachain-id 888
+      --parachain-id 28
       --ws-port 9845
       --port 40335
       --rpc-port 9836
