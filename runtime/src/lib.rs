@@ -235,7 +235,7 @@ impl pallet_sudo::Config for Runtime {
 impl cumulus_pallet_parachain_system::Config for Runtime {
 	type Event = Event;
 	type OnValidationData = ();
-	type SelfParaId = parachain_info::Module<Runtime>;
+	type SelfParaId = parachain_info::Pallet<Runtime>;
 	type DownwardMessageHandlers = ();
 	type HrmpMessageHandlers = ();
 }
@@ -482,31 +482,31 @@ construct_runtime! {
 		NodeBlock = rococo_parachain_primitives::Block,
 		UncheckedExtrinsic = UncheckedExtrinsic,
 	{
-		System: frame_system::{Module, Call, Storage, Config, Event<T>},
-		Timestamp: pallet_timestamp::{Module, Call, Storage, Inherent},
-		Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
-		Sudo: pallet_sudo::{Module, Call, Storage, Config<T>, Event<T>},
-		RandomnessCollectiveFlip: pallet_randomness_collective_flip::{Module, Call, Storage},
-		ParachainSystem: cumulus_pallet_parachain_system::{Module, Call, Storage, Inherent, Event},
-		TransactionPayment: pallet_transaction_payment::{Module, Storage},
-		ParachainInfo: parachain_info::{Module, Storage, Config},
-		XcmHandler: cumulus_pallet_xcm_handler::{Module, Call, Event<T>, Origin},
+		System: frame_system::{Pallet, Call, Storage, Config, Event<T>},
+		Timestamp: pallet_timestamp::{Pallet, Call, Storage, Inherent},
+		Balances: pallet_balances::{Pallet, Call, Storage, Config<T>, Event<T>},
+		Sudo: pallet_sudo::{Pallet, Call, Storage, Config<T>, Event<T>},
+		RandomnessCollectiveFlip: pallet_randomness_collective_flip::{Pallet, Call, Storage},
+		ParachainSystem: cumulus_pallet_parachain_system::{Pallet, Call, Storage, Inherent, Event},
+		TransactionPayment: pallet_transaction_payment::{Pallet, Storage},
+		ParachainInfo: parachain_info::{Pallet, Storage, Config},
+		XcmHandler: cumulus_pallet_xcm_handler::{Pallet, Call, Event<T>, Origin},
 
 		// Subsocial custom pallets:
-		Permissions: pallet_permissions::{Module, Call},
-		Posts: pallet_posts::{Module, Call, Storage, Event<T>},
-		PostHistory: pallet_post_history::{Module, Storage},
-		ProfileFollows: pallet_profile_follows::{Module, Call, Storage, Event<T>},
-		Profiles: pallet_profiles::{Module, Call, Storage, Event<T>},
-		ProfileHistory: pallet_profile_history::{Module, Storage},
-		Reactions: pallet_reactions::{Module, Call, Storage, Event<T>},
-		Roles: pallet_roles::{Module, Call, Storage, Event<T>},
-		Scores: pallet_scores::{Module, Call, Storage, Event<T>},
-		SpaceFollows: pallet_space_follows::{Module, Call, Storage, Event<T>},
-		SpaceHistory: pallet_space_history::{Module, Storage},
-		// SpaceOwnership: pallet_space_ownership::{Module, Call, Storage, Event<T>},
-		Spaces: pallet_spaces::{Module, Call, Storage, Event<T>, Config<T>},
-		Utils: pallet_utils::{Module, Storage, Event<T>, Config<T>},
+		Permissions: pallet_permissions::{Pallet, Call},
+		Posts: pallet_posts::{Pallet, Call, Storage, Event<T>},
+		PostHistory: pallet_post_history::{Pallet, Storage},
+		ProfileFollows: pallet_profile_follows::{Pallet, Call, Storage, Event<T>},
+		Profiles: pallet_profiles::{Pallet, Call, Storage, Event<T>},
+		ProfileHistory: pallet_profile_history::{Pallet, Storage},
+		Reactions: pallet_reactions::{Pallet, Call, Storage, Event<T>},
+		Roles: pallet_roles::{Pallet, Call, Storage, Event<T>},
+		Scores: pallet_scores::{Pallet, Call, Storage, Event<T>},
+		SpaceFollows: pallet_space_follows::{Pallet, Call, Storage, Event<T>},
+		SpaceHistory: pallet_space_history::{Pallet, Storage},
+		// SpaceOwnership: pallet_space_ownership::{Pallet, Call, Storage, Event<T>},
+		Spaces: pallet_spaces::{Pallet, Call, Storage, Event<T>, Config<T>},
+		Utils: pallet_utils::{Pallet, Storage, Event<T>, Config<T>},
 	}
 }
 
@@ -533,13 +533,13 @@ pub type SignedExtra = (
 pub type UncheckedExtrinsic = generic::UncheckedExtrinsic<Address, Call, Signature, SignedExtra>;
 /// Extrinsic type that has already been checked.
 pub type CheckedExtrinsic = generic::CheckedExtrinsic<AccountId, Call, SignedExtra>;
-/// Executive: handles dispatch to the various modules.
+/// Executive: handles dispatch to the various pallets.
 pub type Executive = frame_executive::Executive<
 	Runtime,
 	Block,
 	frame_system::ChainContext<Runtime>,
 	Runtime,
-	AllModules,
+	AllPallets,
 >;
 
 impl_runtime_apis! {
@@ -583,7 +583,7 @@ impl_runtime_apis! {
 		}
 
 		fn random_seed() -> <Block as BlockT>::Hash {
-			RandomnessCollectiveFlip::random_seed()
+			RandomnessCollectiveFlip::random_seed().0
 		}
 	}
 
