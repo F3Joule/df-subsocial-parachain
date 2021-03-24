@@ -171,8 +171,8 @@ impl Config for Test {
     type SpaceFollows = Roles;
 }
 
-type System = system::Module<Test>;
-type Balances = pallet_balances::Module<Test>;
+type System = system::Pallet<Test>;
+type Balances = pallet_balances::Pallet<Test>;
 pub(crate) type Roles = Module<Test>;
 
 pub type AccountId = u64;

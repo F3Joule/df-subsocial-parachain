@@ -12,7 +12,7 @@ use frame_system::{self as system, ensure_signed};
 
 use pallet_utils::{Content, WhoAndWhen, SpaceId, Module as Utils};
 use pallet_posts::PostId;
-use pallet_spaces::Module as Spaces;
+use pallet_spaces::Pallet as Spaces;
 
 /*
 #[cfg(test)]

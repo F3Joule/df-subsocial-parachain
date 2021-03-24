@@ -12,7 +12,7 @@ use frame_system::{self as system, ensure_signed};
 
 use pallet_permissions::SpacePermission;
 use pallet_posts::{Module as Posts, Post, PostById, PostId};
-use pallet_spaces::Module as Spaces;
+use pallet_spaces::Pallet as Spaces;
 use pallet_utils::{vec_remove_on, WhoAndWhen};
 
 pub type ReactionId = u64;

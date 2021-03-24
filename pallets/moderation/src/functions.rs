@@ -1,9 +1,9 @@
 use crate::*;
 
 use frame_support::dispatch::DispatchError;
-use pallet_posts::Module as Posts;
+use pallet_posts::Pallet as Posts;
 use pallet_spaces::Space;
-use pallet_space_follows::Module as SpaceFollows;
+use pallet_space_follows::Pallet as SpaceFollows;
 use df_traits::moderation::*;
 
 impl<T: Config> Module<T> {

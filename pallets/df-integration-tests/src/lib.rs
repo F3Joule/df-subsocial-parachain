@@ -282,21 +282,21 @@ mod tests {
 
     impl pallet_space_history::Config for TestRuntime {}
 
-    type System = system::Module<TestRuntime>;
-    type Balances = pallet_balances::Module<TestRuntime>;
+    type System = system::Pallet<TestRuntime>;
+    type Balances = pallet_balances::Pallet<TestRuntime>;
 
-    type Posts = pallet_posts::Module<TestRuntime>;
-    type PostHistory = pallet_post_history::Module<TestRuntime>;
-    type ProfileFollows = pallet_profile_follows::Module<TestRuntime>;
-    type Profiles = pallet_profiles::Module<TestRuntime>;
-    type ProfileHistory = pallet_profile_history::Module<TestRuntime>;
-    type Reactions = pallet_reactions::Module<TestRuntime>;
-    type Roles = pallet_roles::Module<TestRuntime>;
-    type Scores = pallet_scores::Module<TestRuntime>;
-    type SpaceFollows = pallet_space_follows::Module<TestRuntime>;
-    type SpaceHistory = pallet_space_history::Module<TestRuntime>;
-    type SpaceOwnership = pallet_space_ownership::Module<TestRuntime>;
-    type Spaces = pallet_spaces::Module<TestRuntime>;
+    type Posts = pallet_posts::Pallet<TestRuntime>;
+    type PostHistory = pallet_post_history::Pallet<TestRuntime>;
+    type ProfileFollows = pallet_profile_follows::Pallet<TestRuntime>;
+    type Profiles = pallet_profiles::Pallet<TestRuntime>;
+    type ProfileHistory = pallet_profile_history::Pallet<TestRuntime>;
+    type Reactions = pallet_reactions::Pallet<TestRuntime>;
+    type Roles = pallet_roles::Pallet<TestRuntime>;
+    type Scores = pallet_scores::Pallet<TestRuntime>;
+    type SpaceFollows = pallet_space_follows::Pallet<TestRuntime>;
+    type SpaceHistory = pallet_space_history::Pallet<TestRuntime>;
+    type SpaceOwnership = pallet_space_ownership::Pallet<TestRuntime>;
+    type Spaces = pallet_spaces::Pallet<TestRuntime>;
 
     pub type AccountId = u64;
     type BlockNumber = u64;

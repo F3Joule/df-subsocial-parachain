@@ -84,8 +84,8 @@ impl Config for Test {
     type MaxHandleLen = MaxHandleLen;
 }
 
-type System = system::Module<Test>;
-type Balances = pallet_balances::Module<Test>;
+type System = system::Pallet<Test>;
+type Balances = pallet_balances::Pallet<Test>;
 type Utils = Module<Test>;
 
 pub type AccountId = u64;
