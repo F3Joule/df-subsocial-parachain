@@ -18,13 +18,16 @@
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
+use codec::{Decode, Encode};
+#[cfg(feature = "std")]
+use serde::{Deserialize, Serialize};
 use sp_runtime::{
-	generic,
-	traits::{BlakeTwo256, IdentifyAccount, Verify},
-	MultiSignature,
+    generic,
+    MultiSignature, RuntimeDebug,
+    traits::{BlakeTwo256, IdentifyAccount, Verify},
 };
-
 pub use sp_runtime::OpaqueExtrinsic as UncheckedExtrinsic;
+use sp_std::{convert::TryFrom, prelude::*};
 
 /// Opaque block header type.
 pub type Header = generic::Header<BlockNumber, BlakeTwo256>;
@@ -57,3 +60,24 @@ pub type Hash = sp_core::H256;
 
 /// Digest item type.
 pub type DigestItem = generic::DigestItem<Hash>;
+
+/// Signed version of Balance
+pub type Amount = i128;
+
+#[derive(Encode, Decode, Eq, PartialEq, Copy, Clone, RuntimeDebug, PartialOrd, Ord)]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+pub enum CurrencyId {
+    SUB = 0,
+    RCO,
+}
+
+impl TryFrom<Vec<u8>> for CurrencyId {
+    type Error = ();
+    fn try_from(v: Vec<u8>) -> Result<CurrencyId, ()> {
+        match v.as_slice() {
+            b"SUB" => Ok(CurrencyId::SUB),
+            b"RCO" => Ok(CurrencyId::RCO),
+            _ => Err(()),
+        }
+    }
+}
