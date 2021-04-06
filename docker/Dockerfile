@@ -41,6 +41,10 @@ COPY --from=builder /subsocial/target/$PROFILE/subsocial-collator /usr/local/bin
 RUN ldd /usr/local/bin/subsocial-collator && \
 	/usr/local/bin/subsocial-collator --version
 
+RUN mkdir -p /subsocial/.local/share/subsocial-collator && \
+  chown -R subsocial:subsocial /subsocial/.local && \
+  ln -s /subsocial/.local/share/subsocial-collator /data
+
 # Shrinking
 RUN rm -rf /usr/lib/python* && \
 	rm -rf /usr/bin /usr/sbin /usr/share/man
@@ -49,7 +53,7 @@ RUN rm -rf /usr/lib/python* && \
 COPY res/rococo-local.json /
 COPY res/rococo.json /
 
-RUN mkdir /data
+# RUN mkdir /data
 VOLUME ["/data"]
 
 USER subsocial

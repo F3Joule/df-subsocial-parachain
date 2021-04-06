@@ -4,6 +4,8 @@ services:
     image: dappforce/subsocial-node:rococo-v1
     container_name: subsocial-collator
     restart: always
+    volumes:
+      - node_collator_data:/data
     command:
       --db-cache 1024
       --database paritydb-experimental
@@ -22,3 +24,6 @@ services:
       --port 30344
       --ws-port 9978
     network_mode: "host"
+
+volumes:
+  node_collator_data:
