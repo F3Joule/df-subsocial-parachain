@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 use sp_core::{sr25519, Pair, Public};
 use sp_runtime::traits::{IdentifyAccount, Verify};
 use sc_telemetry::TelemetryEndpoints;
+use subsocial_parachain_primitives::CurrencyId;
 
 use parachain_runtime::constants::currency::SUBS;
 
@@ -178,6 +179,12 @@ fn testnet_genesis(
 		},
 		pallet_spaces: parachain_runtime::SpacesConfig {
 			endowed_account: root_key,
+		},
+		orml_tokens: parachain_runtime::TokensConfig {
+			endowed_accounts: endowed_accounts
+				.iter()
+				.flat_map(|(a, b)| vec![(a.clone(), CurrencyId::AUSD, b * SUBS)])
+				.collect(),
 		},
 	}
 }

@@ -1,6 +1,6 @@
 [package]
 name = 'subsocial-parachain-runtime'
-version = '0.1.0'
+version = '0.1.1'
 authors = ['DappForce <dappforce@pm.me>']
 edition = '2018'
 license = 'GPL-3.0-only'
@@ -49,6 +49,14 @@ polkadot-parachain = { git = "https://github.com/paritytech/polkadot", default-f
 xcm = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "rococo-v1" }
 xcm-builder = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "rococo-v1" }
 xcm-executor = { git = "https://github.com/paritytech/polkadot", default-features = false, branch = "rococo-v1" }
+
+# ORML dependencies
+orml-currencies = { path = "../orml/currencies", default-features = false }
+orml-traits = { path = "../orml/traits", default-features = false }
+orml-tokens = { path = "../orml/tokens", default-features = false }
+orml-xcm-support = { path = "../orml/xcm-support", default-features = false }
+orml-xtokens = { path = "../orml/xtokens", default-features = false }
+orml-unknown-tokens = { path = "../orml/unknown-tokens", default-features = false }
 
 # Subsocial dependencies
 pallet-permissions = { path = "../pallets/permissions", default-features = false }
@@ -100,6 +108,12 @@ std = [
 	"xcm/std",
 	"xcm-builder/std",
 	"xcm-executor/std",
+	"orml-currencies/std",
+	"orml-traits/std",
+	"orml-tokens/std",
+	"orml-xcm-support/std",
+	"orml-xtokens/std",
+	"orml-unknown-tokens/std",
 	"pallet-permissions/std",
 	"pallet-post-history/std",
 	"pallet-posts/std",
