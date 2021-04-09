@@ -69,6 +69,7 @@ pub type Amount = i128;
 pub enum CurrencyId {
     SUB = 0,
     RCO,
+    AUSD,
 }
 
 impl TryFrom<Vec<u8>> for CurrencyId {
@@ -77,6 +78,7 @@ impl TryFrom<Vec<u8>> for CurrencyId {
         match v.as_slice() {
             b"SUB" => Ok(CurrencyId::SUB),
             b"RCO" => Ok(CurrencyId::RCO),
+            b"AUSD" => Ok(CurrencyId::AUSD),
             _ => Err(()),
         }
     }
