@@ -29,7 +29,7 @@ hex-literal = "0.2.1"
 
 # Parachain dependencies
 parachain-runtime = { package = "subsocial-parachain-runtime", path = "runtime" }
-rococo-parachain-primitives = { path = "primitives" }
+subsocial-parachain-primitives = { path = "primitives" }
 
 # Substrate dependencies
 sp-runtime = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "rococo-v1" }
