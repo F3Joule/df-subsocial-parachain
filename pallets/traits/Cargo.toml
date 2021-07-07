@@ -21,7 +21,7 @@ std = [
 [dependencies.frame-support]
 default-features = false
 git = 'https://github.com/paritytech/substrate.git'
-branch = 'rococo-v1'
+branch = 'polkadot-v0.9.7'
 
 [dependencies.pallet-permissions]
 default-features = false
